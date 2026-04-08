@@ -62,7 +62,7 @@
                     <div class="flex justify-between text-stone-500"><span>Shipping</span><span id="ship-price">₹0</span></div>
                     <div class="flex justify-between text-xl font-bold pt-4 border-t border-stone-200"><span>Total</span><span id="grand-price">₹0</span></div>
                 </div>
-                <button type="submit" form="order-form" class="w-full mt-8 bg-[#1A3A3A] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-black transition">PLACE ORDER ON WHATSAPP</button>
+                <button type="submit" form="order-form" class="w-full mt-8 bg-[#1A3A3A] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-black transition uppercase">Place Order on WhatsApp</button>
             </div>
         </section>
     </main>
@@ -70,24 +70,27 @@
     <script>
         let storeData = {};
         let cart = [];
-        let activeImageIndexes = {}; // Tracks which image is showing per product
+        let activeImageIndexes = {}; 
 
         async function init() {
-            const res = await fetch('products.json');
-            storeData = await res.json();
-            
-            document.getElementById('nav-logo').src = storeData.config.logo_url;
-            document.getElementById('nav-brand').innerText = storeData.config.store_name;
+            try {
+                const res = await fetch('products.json');
+                storeData = await res.json();
+                
+                document.getElementById('nav-logo').src = storeData.config.logo_url;
+                document.getElementById('nav-brand').innerText = storeData.config.store_name;
 
-            storeData.categories.forEach(cat => {
-                const opt = document.createElement('option');
-                opt.value = cat; opt.innerText = cat;
-                document.getElementById('category-filter').appendChild(opt);
-            });
+                storeData.categories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat; opt.innerText = cat;
+                    document.getElementById('category-filter').appendChild(opt);
+                });
 
-            // Initialize image indexes
-            storeData.products.forEach(p => activeImageIndexes[p.id] = 0);
-            render();
+                storeData.products.forEach(p => activeImageIndexes[p.id] = 0);
+                render();
+            } catch (error) {
+                console.error("Error loading products.json:", error);
+            }
         }
 
         function changeImg(prodId, step) {
@@ -117,10 +120,13 @@
                     card.className = "group";
                     card.innerHTML = `
                         <div class="relative aspect-9-16 overflow-hidden rounded-2xl bg-stone-100 shadow-sm">
-                            <img id="img-${p.id}" src="${p.images[activeImageIndexes[p.id]]}" class="w-full h-full object-cover">
+                            <img id="img-${p.id}" 
+                                 src="${p.images[activeImageIndexes[p.id]]}" 
+                                 class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://via.placeholder.com/400x711?text=Image+Not+Found'">
                             ${p.images.length > 1 ? `
-                                <button onclick="changeImg(${p.id}, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800">❮</button>
-                                <button onclick="changeImg(${p.id}, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800">❯</button>
+                                <button onclick="changeImg(${p.id}, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800 hover:bg-white transition">❮</button>
+                                <button onclick="changeImg(${p.id}, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800 hover:bg-white transition">❯</button>
                             ` : ''}
                         </div>
                         <div class="mt-4 flex justify-between items-start">
@@ -129,8 +135,8 @@
                                 <p class="text-stone-500 font-bold">${storeData.config.currency}${p.price}</p>
                             </div>
                             <div class="flex items-center gap-1">
-                                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-10 text-center border p-1 rounded text-sm outline-none">
-                                <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white px-3 py-2 rounded text-xs font-bold">ADD</button>
+                                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-12 text-center border p-1 rounded text-sm outline-none focus:border-[#1A3A3A]">
+                                <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white px-4 py-2 rounded text-xs font-bold hover:bg-black transition">ADD</button>
                             </div>
                         </div>
                     `;
@@ -142,10 +148,19 @@
 
         function addToCart(id) {
             const product = storeData.products.find(p => p.id === id);
-            const qty = parseInt(document.getElementById(`qty-${id}`).value);
+            const qtyInput = document.getElementById(`qty-${id}`);
+            const qty = parseInt(qtyInput.value);
+            
+            if (qty < 1) return;
+
             const existing = cart.find(i => i.id === id);
-            if(existing) existing.qty += qty;
-            else cart.push({...product, qty});
+            if(existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({...product, qty});
+            }
+            
+            qtyInput.value = 1; // Reset input after adding
             updateUI();
         }
 
@@ -153,24 +168,52 @@
             const list = document.getElementById('cart-items');
             const sub = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
             const ship = sub > 0 ? storeData.config.shipping_fee : 0;
+            
             document.getElementById('cart-count').innerText = cart.length;
             document.getElementById('sub-price').innerText = `${storeData.config.currency}${sub}`;
             document.getElementById('ship-price').innerText = `${storeData.config.currency}${ship}`;
             document.getElementById('grand-price').innerText = `${storeData.config.currency}${sub + ship}`;
-            list.innerHTML = cart.map(i => `<div class="flex justify-between text-sm"><span>${i.name} (x${i.qty})</span><span>${storeData.config.currency}${i.price * i.qty}</span></div>`).join('');
+            
+            list.innerHTML = cart.map(i => `
+                <div class="flex justify-between text-sm group">
+                    <span class="text-stone-600">${i.name} <span class="text-xs font-bold text-stone-400">x${i.qty}</span></span>
+                    <span class="font-medium">${storeData.config.currency}${i.price * i.qty}</span>
+                </div>
+            `).join('');
         }
 
         document.getElementById('category-filter').addEventListener('change', render);
         document.getElementById('search-input').addEventListener('input', render);
         
+        // --- WHATSAPP ORDER LOGIC WITH ADDRESS ---
         document.getElementById('order-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            if(!cart.length) return alert("Cart is empty!");
-            const msg = `*NEW ORDER FROM ${storeData.config.store_name}*%0A` + 
-                        `*Customer:* ${document.getElementById('name').value}%0A` +
-                        `*Items:* ${cart.map(i => `${i.name} x${i.qty}`).join(', ')}%0A` +
-                        `*Total:* ${document.getElementById('grand-price').innerText}`;
-            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${msg}`, '_blank');
+            
+            if(cart.length === 0) {
+                alert("Your cart is empty. Add some artisanal weaves before checking out!");
+                return;
+            }
+
+            // Capture form values
+            const customerName = document.getElementById('name').value.trim();
+            const customerPhone = document.getElementById('phone').value.trim();
+            const customerAddress = document.getElementById('address').value.trim();
+            const totalAmount = document.getElementById('grand-price').innerText;
+
+            // Format item list for WhatsApp
+            const itemString = cart.map(item => `• ${item.name} (x${item.qty}) - ${storeData.config.currency}${item.price * item.qty}`).join('%0A');
+
+            // Build the final message template
+            const message = `*NEW ORDER - NOOLPINNAL*%0A%0A` +
+                            `*Customer:* ${customerName}%0A` +
+                            `*WhatsApp:* ${customerPhone}%0A%0A` +
+                            `*Items Ordered:*%0A${itemString}%0A%0A` +
+                            `*Total Amount:* ${totalAmount}%0A%0A` +
+                            `*Delivery Address:*%0A${customerAddress}`;
+
+            // Open WhatsApp
+            const waUrl = `https://wa.me/${storeData.config.whatsapp_number}?text=${message}`;
+            window.open(waUrl, '_blank');
         });
 
         init();
