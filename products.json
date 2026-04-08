@@ -14,7 +14,7 @@
       "category": "Airpods/Mini pouch", 
       "price": 200, 
       "images": [
-        "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/9903100e18e3163466e3929b0e3d133c27b0ff5a/images/box%20shaped%20cute%20mini%20pouch%20.png"
+        "./images/box shaped cute mini pouch.png"
       ] 
     },
     { 
@@ -22,7 +22,7 @@
       "name": "Flower pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": ["https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/9903100e18e3163466e3929b0e3d133c27b0ff5a/images/flower%20pouch.png"] 
+      "images": [./images/flower pouch.png] 
     }
   ]
 }
