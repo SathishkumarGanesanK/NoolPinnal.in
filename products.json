@@ -13,7 +13,7 @@
       "name": "Square shaped mini pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": ["./images/square shaped mini pouch.png.png"] 
+      "images": ["./images/SquareShapedMiniPouch.png"] 
     },
     { 
       "id": 2, 
@@ -34,7 +34,7 @@
       "name": "Box Shaped Mini Pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": ["./images/box shaped cute mini pouch.png"] 
+      "images": ["./images/BoxShapedMiniPouch.png"] 
     },
     { 
       "id": 5, 
