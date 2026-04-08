@@ -6,7 +6,7 @@
     "currency": "₹",
     "logo_url": "./images/NoolPinnal Logo.png"
   },
-  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile pouch","Headphone pouch"],
+  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile Pouch","Headphone pouch"],
   "products": [
     { 
       "id": 1, 
