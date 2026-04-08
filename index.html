@@ -10,217 +10,170 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .serif { font-family: 'Playfair Display', serif; }
         .aspect-9-16 { aspect-ratio: 9 / 16; }
-        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
-        input[type="number"]::-webkit-inner-spin-button { display: none; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
+        input[type=number]::-webkit-inner-spin-button { display: none; }
     </style>
 </head>
 <body class="bg-[#FDFCFB] text-[#2D2A26]">
 
     <nav class="sticky top-0 z-50 glass border-b border-stone-100">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <img id="nav-logo" src="" alt="Logo" class="h-10 w-10 rounded-full object-cover hidden">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <img id="nav-logo" src="" alt="" class="h-12 w-12 rounded-full object-cover border border-stone-100" onerror="this.style.display='none'">
                 <span id="nav-brand" class="text-xl font-bold tracking-tight text-[#1A3A3A]"></span>
             </div>
-            <div class="flex items-center gap-6">
-                <a href="#checkout" class="relative">
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                </a>
+
+            <div class="flex items-center bg-white border border-stone-200 rounded-full px-4 py-1.5 shadow-sm w-full max-w-xl">
+                <select id="category-filter" class="bg-transparent text-sm font-medium border-r border-stone-200 pr-4 mr-4 outline-none cursor-pointer text-stone-600">
+                    <option value="all">All Categories</option>
+                </select>
+                <div class="flex-grow flex items-center">
+                    <input type="text" id="search-input" placeholder="Search products..." class="w-full bg-transparent text-sm outline-none">
+                    <button id="clear-search" class="hidden text-stone-400 px-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-stone-400 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </div>
             </div>
+
+            <a href="#checkout" class="relative p-2">
+                <span id="cart-count" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            </a>
         </div>
     </nav>
 
-    <header class="py-20 text-center px-4">
-        <img id="hero-logo" src="" alt="NoolPinnal" class="h-32 mx-auto mb-8 transition-opacity duration-500 opacity-0">
-        <h1 class="serif text-5xl md:text-6xl text-[#1A3A3A] mb-4">Elegance in every knot.</h1>
-        <p class="text-stone-400 uppercase tracking-[0.3em] text-xs">Curated Handloom Collection</p>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-6">
-        <div id="catalog" class="space-y-24"></div>
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div id="catalog" class="space-y-20"></div>
 
         <section id="checkout" class="py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 border-t mt-32">
             <div class="lg:col-span-7">
-                <h2 class="serif text-3xl mb-8">Shipping Details</h2>
-                <form id="order-form" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="relative">
-                            <input type="text" id="name" placeholder=" " class="peer w-full border-b border-stone-300 py-2 focus:border-[#1A3A3A] outline-none bg-transparent">
-                            <label class="absolute left-0 -top-3.5 text-stone-400 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs">Full Name</label>
-                        </div>
-                        <div class="relative">
-                            <input type="tel" id="phone" placeholder=" " class="peer w-full border-b border-stone-300 py-2 focus:border-[#1A3A3A] outline-none bg-transparent">
-                            <label class="absolute left-0 -top-3.5 text-stone-400 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs">WhatsApp Number</label>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <input type="email" id="email" placeholder=" " class="peer w-full border-b border-stone-300 py-2 focus:border-[#1A3A3A] outline-none bg-transparent">
-                        <label class="absolute left-0 -top-3.5 text-stone-400 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs">Email Address</label>
-                    </div>
-                    <div class="relative">
-                        <textarea id="address" placeholder=" " rows="3" class="peer w-full border-b border-stone-300 py-2 focus:border-[#1A3A3A] outline-none bg-transparent"></textarea>
-                        <label class="absolute left-0 -top-3.5 text-stone-400 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-xs">Shipping Address</label>
-                    </div>
+                <h2 class="serif text-3xl mb-8">Shipping Information</h2>
+                <form id="order-form" class="space-y-6">
+                    <input type="text" id="name" placeholder="Full Name" class="w-full border-b border-stone-200 py-3 outline-none focus:border-[#1A3A3A]" required>
+                    <input type="tel" id="phone" placeholder="WhatsApp Number" class="w-full border-b border-stone-200 py-3 outline-none focus:border-[#1A3A3A]" required>
+                    <textarea id="address" placeholder="Shipping Address" rows="3" class="w-full border-b border-stone-200 py-3 outline-none focus:border-[#1A3A3A]" required></textarea>
                 </form>
             </div>
 
-            <div class="lg:col-span-5 bg-stone-50 p-10 rounded-3xl h-fit">
-                <h3 class="text-xl font-bold mb-8 flex justify-between">
-                    <span>Your Bag</span>
-                    <span id="bag-total-count" class="text-stone-400 font-normal">0 Items</span>
-                </h3>
-                <div id="cart-items" class="space-y-6 mb-10 overflow-y-auto max-h-[400px]"></div>
-                
-                <div class="space-y-3 pt-6 border-t border-stone-200">
+            <div class="lg:col-span-5 bg-stone-50 p-8 rounded-3xl h-fit shadow-sm">
+                <h3 class="text-xl font-bold mb-6">Cart Items</h3>
+                <div id="cart-items" class="space-y-4 mb-8"></div>
+                <div class="space-y-2 border-t pt-4">
                     <div class="flex justify-between text-stone-500"><span>Subtotal</span><span id="sub-price">₹0</span></div>
                     <div class="flex justify-between text-stone-500"><span>Shipping</span><span id="ship-price">₹0</span></div>
-                    <div class="flex justify-between text-2xl font-bold text-[#1A3A3A] pt-4 border-t border-stone-200">
-                        <span>Grand Total</span><span id="grand-price">₹0</span>
-                    </div>
+                    <div class="flex justify-between text-xl font-bold pt-4 border-t border-stone-200"><span>Total</span><span id="grand-price">₹0</span></div>
                 </div>
-                <button type="submit" form="order-form" class="w-full mt-10 bg-[#1A3A3A] text-white py-5 rounded-2xl font-bold tracking-widest hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    PLACE ORDER VIA WHATSAPP
-                </button>
+                <button type="submit" form="order-form" class="w-full mt-8 bg-[#1A3A3A] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-black transition">PLACE ORDER ON WHATSAPP</button>
             </div>
         </section>
     </main>
 
-    <footer class="py-20 text-center border-t border-stone-100 text-stone-400 text-xs tracking-widest uppercase">
-        &copy; 2026 NoolPinnal.in | Handwoven with Love
-    </footer>
-
     <script>
         let storeData = {};
         let cart = [];
+        let activeImageIndexes = {}; // Tracks which image is showing per product
 
-        async function initStore() {
-            try {
-                const res = await fetch('products.json');
-                storeData = await res.json();
-                
-                // Set Logo and Config
-                document.getElementById('nav-logo').src = storeData.config.logo_url;
-                document.getElementById('nav-logo').classList.remove('hidden');
-                document.getElementById('hero-logo').src = storeData.config.logo_url;
-                document.getElementById('hero-logo').classList.replace('opacity-0', 'opacity-100');
-                document.getElementById('nav-brand').innerText = storeData.config.store_name;
-                
-                renderProducts();
-            } catch (e) {
-                console.error("Store load failed:", e);
-                document.getElementById('catalog').innerHTML = `<p class="text-center py-20 text-red-400">Error loading store data. Make sure products.json is in the same folder.</p>`;
-            }
-        }
-
-        function renderProducts() {
-            const catalog = document.getElementById('catalog');
-            catalog.innerHTML = '';
+        async function init() {
+            const res = await fetch('products.json');
+            storeData = await res.json();
+            
+            document.getElementById('nav-logo').src = storeData.config.logo_url;
+            document.getElementById('nav-brand').innerText = storeData.config.store_name;
 
             storeData.categories.forEach(cat => {
-                const products = storeData.products.filter(p => p.category === cat);
+                const opt = document.createElement('option');
+                opt.value = cat; opt.innerText = cat;
+                document.getElementById('category-filter').appendChild(opt);
+            });
+
+            // Initialize image indexes
+            storeData.products.forEach(p => activeImageIndexes[p.id] = 0);
+            render();
+        }
+
+        function changeImg(prodId, step) {
+            const product = storeData.products.find(p => p.id === prodId);
+            const total = product.images.length;
+            activeImageIndexes[prodId] = (activeImageIndexes[prodId] + step + total) % total;
+            document.getElementById(`img-${prodId}`).src = product.images[activeImageIndexes[prodId]];
+        }
+
+        function render() {
+            const container = document.getElementById('catalog');
+            const selectedCat = document.getElementById('category-filter').value;
+            const search = document.getElementById('search-input').value.toLowerCase();
+            container.innerHTML = '';
+
+            const cats = selectedCat === 'all' ? storeData.categories : [selectedCat];
+
+            cats.forEach(cat => {
+                const products = storeData.products.filter(p => p.category === cat && p.name.toLowerCase().includes(search));
                 if(products.length === 0) return;
 
                 const section = document.createElement('section');
-                section.innerHTML = `
-                    <h2 class="text-xs uppercase tracking-[0.4em] mb-12 text-stone-400 flex items-center gap-4">
-                        <span class="bg-stone-100 h-[1px] flex-grow"></span>
-                        ${cat}
-                        <span class="bg-stone-100 h-[1px] flex-grow"></span>
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-                        ${products.map(p => `
-                            <div class="group relative">
-                                <div class="aspect-9-16 overflow-hidden rounded-2xl bg-stone-100">
-                                    <img src="${p.image}" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
-                                </div>
-                                <div class="mt-8 flex justify-between items-end">
-                                    <div>
-                                        <h3 class="text-xl font-light">${p.name}</h3>
-                                        <p class="text-lg font-bold text-[#1A3A3A] mt-1">${storeData.config.currency}${p.price}</p>
-                                    </div>
-                                    <div class="flex items-center bg-white shadow-2xl rounded-xl border border-stone-100 p-1">
-                                        <input type="number" id="qty-${p.id}" value="1" min="1" class="w-10 text-center font-bold text-sm bg-transparent outline-none">
-                                        <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white p-2 rounded-lg hover:bg-black transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
+                section.innerHTML = `<h3 class="serif text-2xl mb-8">${cat}</h3><div class="grid grid-cols-1 md:grid-cols-3 gap-12"></div>`;
+                
+                products.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = "group";
+                    card.innerHTML = `
+                        <div class="relative aspect-9-16 overflow-hidden rounded-2xl bg-stone-100 shadow-sm">
+                            <img id="img-${p.id}" src="${p.images[activeImageIndexes[p.id]]}" class="w-full h-full object-cover">
+                            ${p.images.length > 1 ? `
+                                <button onclick="changeImg(${p.id}, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800">❮</button>
+                                <button onclick="changeImg(${p.id}, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800">❯</button>
+                            ` : ''}
+                        </div>
+                        <div class="mt-4 flex justify-between items-start">
+                            <div>
+                                <h4 class="font-medium text-lg">${p.name}</h4>
+                                <p class="text-stone-500 font-bold">${storeData.config.currency}${p.price}</p>
                             </div>
-                        `).join('')}
-                    </div>
-                `;
-                catalog.appendChild(section);
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-10 text-center border p-1 rounded text-sm outline-none">
+                                <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white px-3 py-2 rounded text-xs font-bold">ADD</button>
+                            </div>
+                        </div>
+                    `;
+                    section.querySelector('div').appendChild(card);
+                });
+                container.appendChild(section);
             });
         }
 
         function addToCart(id) {
             const product = storeData.products.find(p => p.id === id);
             const qty = parseInt(document.getElementById(`qty-${id}`).value);
-            const existing = cart.find(item => item.id === id);
-
+            const existing = cart.find(i => i.id === id);
             if(existing) existing.qty += qty;
             else cart.push({...product, qty});
-
-            updateCartUI();
+            updateUI();
         }
 
-        function updateCartUI() {
+        function updateUI() {
             const list = document.getElementById('cart-items');
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const ship = subtotal > 0 ? storeData.config.shipping_fee : 0;
-
+            const sub = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const ship = sub > 0 ? storeData.config.shipping_fee : 0;
             document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('bag-total-count').innerText = `${cart.length} Items`;
-            document.getElementById('sub-price').innerText = `${storeData.config.currency}${subtotal}`;
+            document.getElementById('sub-price').innerText = `${storeData.config.currency}${sub}`;
             document.getElementById('ship-price').innerText = `${storeData.config.currency}${ship}`;
-            document.getElementById('grand-price').innerText = `${storeData.config.currency}${subtotal + ship}`;
-
-            list.innerHTML = cart.length ? cart.map(item => `
-                <div class="flex gap-4 items-center animate-fade-in">
-                    <img src="${item.image}" class="w-16 h-20 object-cover rounded-lg shadow-sm">
-                    <div class="flex-grow">
-                        <h4 class="font-bold text-sm text-[#1A3A3A]">${item.name}</h4>
-                        <p class="text-xs text-stone-400">Qty: ${item.qty} × ${storeData.config.currency}${item.price}</p>
-                    </div>
-                    <span class="font-bold text-sm">${storeData.config.currency}${item.price * item.qty}</span>
-                </div>
-            `).join('') : `<div class="text-center py-10 text-stone-300 italic">Your bag is empty</div>`;
+            document.getElementById('grand-price').innerText = `${storeData.config.currency}${sub + ship}`;
+            list.innerHTML = cart.map(i => `<div class="flex justify-between text-sm"><span>${i.name} (x${i.qty})</span><span>${storeData.config.currency}${i.price * i.qty}</span></div>`).join('');
         }
 
+        document.getElementById('category-filter').addEventListener('change', render);
+        document.getElementById('search-input').addEventListener('input', render);
+        
         document.getElementById('order-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            if(!cart.length) return alert("Your bag is empty!");
-
-            const name = document.getElementById('name').value;
-            const address = document.getElementById('address').value;
-            const phone = document.getElementById('phone').value;
-            
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const total = subtotal + storeData.config.shipping_fee;
-
-            let text = `*NEW ORDER - ${storeData.config.store_name}*%0A`;
-            text += `---------------------------%0A`;
-            text += `*Customer:* ${name}%0A`;
-            text += `*WhatsApp:* ${phone}%0A`;
-            text += `*Shipping Address:* ${address}%0A%0A`;
-            text += `*BAG ITEMS:*%0A`;
-            cart.forEach(item => {
-                text += `• ${item.name} (x${item.qty}) - ${storeData.config.currency}${item.price * item.qty}%0A`;
-            });
-            text += `%0A*Subtotal:* ${storeData.config.currency}${subtotal}%0A`;
-            text += `*Shipping:* ${storeData.config.currency}${storeData.config.shipping_fee}%0A`;
-            text += `*GRAND TOTAL:* ${storeData.config.currency}${total}%0A`;
-            text += `---------------------------`;
-
-            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${text}`, '_blank');
+            if(!cart.length) return alert("Cart is empty!");
+            const msg = `*NEW ORDER FROM ${storeData.config.store_name}*%0A` + 
+                        `*Customer:* ${document.getElementById('name').value}%0A` +
+                        `*Items:* ${cart.map(i => `${i.name} x${i.qty}`).join(', ')}%0A` +
+                        `*Total:* ${document.getElementById('grand-price').innerText}`;
+            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${msg}`, '_blank');
         });
 
-        initStore();
+        init();
     </script>
 </body>
 </html>

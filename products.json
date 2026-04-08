@@ -4,30 +4,26 @@
     "whatsapp_number": "919080456837",
     "shipping_fee": 100,
     "currency": "₹",
-    "logo_url": "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/c59d03cbbd7de5ddafe33c39adbe85762c0c041f/images/NoolPinnal%20Logo.png"
+    "logo_url": "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/cb47fb2e7f6b0fe7d2fed5596cc82d25fdb6ca91/products.json"
   },
-  "categories": ["Signature Sarees", "Handwoven Stoles", "Home Accents"],
+  "categories": ["Signature Sarees", "Handwoven Stoles"],
   "products": [
-    {
-      "id": 1,
-      "name": "Amber Weaver Silk",
-      "category": "Signature Sarees",
-      "price": 4500,
-      "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1080&h=1920"
+    { 
+      "id": 1, 
+      "name": "Amber Weaver Silk", 
+      "category": "Signature Sarees", 
+      "price": 4500, 
+      "images": [
+        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800",
+        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800"
+      ] 
     },
-    {
-      "id": 2,
-      "name": "Midnight Indigo Wrap",
-      "category": "Handwoven Stoles",
-      "price": 1250,
-      "image": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&q=80&w=1080&h=1920"
-    },
-    {
-      "id": 3,
-      "name": "Floral Loom Throw",
-      "category": "Home Accents",
-      "price": 2100,
-      "image": "https://images.unsplash.com/photo-1574359411659-15573a27f812?auto=format&fit=crop&q=80&w=1080&h=1920"
+    { 
+      "id": 2, 
+      "name": "Midnight Indigo Wrap", 
+      "category": "Handwoven Stoles", 
+      "price": 1250, 
+      "images": ["https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=800"] 
     }
   ]
 }
