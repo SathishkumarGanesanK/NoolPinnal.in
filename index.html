@@ -29,15 +29,21 @@
                 </select>
                 <div class="flex-grow flex items-center">
                     <input type="text" id="search-input" placeholder="Search products..." class="w-full bg-transparent text-sm outline-none">
-                    <button id="clear-search" class="hidden text-stone-400 px-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-stone-400 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
             </div>
 
-            <a href="#checkout" class="relative p-2">
-                <span id="cart-count" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-            </a>
+            <div class="flex items-center gap-4">
+                <button onclick="contactUs()" class="text-[#25D366] hover:scale-110 transition p-2" title="Contact Us">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.06 3.973L0 16l4.104-1.076a7.863 7.863 0 0 0 3.888 1.029h.001c4.367 0 7.926-3.558 7.93-7.93a7.897 7.897 0 0 0-2.322-5.697zM7.994 14.527a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                </button>
+                <a href="#checkout" class="relative p-2">
+                    <span id="cart-count" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -55,7 +61,10 @@
             </div>
 
             <div class="lg:col-span-5 bg-stone-50 p-8 rounded-3xl h-fit shadow-sm">
-                <h3 class="text-xl font-bold mb-6">Cart Items</h3>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Cart Items</h3>
+                    <button onclick="clearCart()" class="text-xs text-red-600 font-bold hover:underline">CLEAR ALL</button>
+                </div>
                 <div id="cart-items" class="space-y-4 mb-8"></div>
                 <div class="space-y-2 border-t pt-4">
                     <div class="flex justify-between text-stone-500"><span>Subtotal</span><span id="sub-price">₹0</span></div>
@@ -87,9 +96,27 @@
                 });
 
                 storeData.products.forEach(p => activeImageIndexes[p.id] = 0);
+
+                const savedCart = localStorage.getItem('noolpinnal_cart');
+                if (savedCart) cart = JSON.parse(savedCart);
+
                 render();
-            } catch (error) {
-                console.error("Error loading products.json:", error);
+                updateUI();
+            } catch (error) { console.error("Init failed:", error); }
+        }
+
+        function contactUs() {
+            const msg = encodeURIComponent("Hi NoolPinnal, I have a query about your products.");
+            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${msg}`, '_blank');
+        }
+
+        function saveCart() { localStorage.setItem('noolpinnal_cart', JSON.stringify(cart)); }
+
+        function clearCart() {
+            if(confirm("Clear your shopping cart?")) {
+                cart = [];
+                saveCart();
+                updateUI();
             }
         }
 
@@ -105,41 +132,31 @@
             const selectedCat = document.getElementById('category-filter').value;
             const search = document.getElementById('search-input').value.toLowerCase();
             container.innerHTML = '';
-
             const cats = selectedCat === 'all' ? storeData.categories : [selectedCat];
 
             cats.forEach(cat => {
                 const products = storeData.products.filter(p => p.category === cat && p.name.toLowerCase().includes(search));
                 if(products.length === 0) return;
-
                 const section = document.createElement('section');
                 section.innerHTML = `<h3 class="serif text-2xl mb-8">${cat}</h3><div class="grid grid-cols-1 md:grid-cols-3 gap-12"></div>`;
-                
                 products.forEach(p => {
                     const card = document.createElement('div');
                     card.className = "group";
                     card.innerHTML = `
-                        <div class="relative aspect-9-16 overflow-hidden rounded-2xl bg-stone-100 shadow-sm">
-                            <img id="img-${p.id}" 
-                                 src="${p.images[activeImageIndexes[p.id]]}" 
-                                 class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-                                 onerror="this.src='https://via.placeholder.com/400x711?text=Image+Not+Found'">
+                        <div class="relative aspect-9-16 overflow-hidden rounded-2xl bg-stone-100">
+                            <img id="img-${p.id}" src="${p.images[activeImageIndexes[p.id]]}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/400x711?text=Image+Error'">
                             ${p.images.length > 1 ? `
-                                <button onclick="changeImg(${p.id}, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800 hover:bg-white transition">❮</button>
-                                <button onclick="changeImg(${p.id}, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md text-stone-800 hover:bg-white transition">❯</button>
+                                <button onclick="changeImg(${p.id}, -1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full text-xs">❮</button>
+                                <button onclick="changeImg(${p.id}, 1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full text-xs">❯</button>
                             ` : ''}
                         </div>
                         <div class="mt-4 flex justify-between items-start">
-                            <div>
-                                <h4 class="font-medium text-lg">${p.name}</h4>
-                                <p class="text-stone-500 font-bold">${storeData.config.currency}${p.price}</p>
-                            </div>
+                            <div><h4 class="font-medium text-lg">${p.name}</h4><p class="text-stone-500 font-bold">${storeData.config.currency}${p.price}</p></div>
                             <div class="flex items-center gap-1">
-                                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-12 text-center border p-1 rounded text-sm outline-none focus:border-[#1A3A3A]">
-                                <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white px-4 py-2 rounded text-xs font-bold hover:bg-black transition">ADD</button>
+                                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-10 text-center border rounded text-sm outline-none">
+                                <button onclick="addToCart(${p.id})" class="bg-[#1A3A3A] text-white px-3 py-2 rounded text-xs font-bold">ADD</button>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                     section.querySelector('div').appendChild(card);
                 });
                 container.appendChild(section);
@@ -148,19 +165,16 @@
 
         function addToCart(id) {
             const product = storeData.products.find(p => p.id === id);
-            const qtyInput = document.getElementById(`qty-${id}`);
-            const qty = parseInt(qtyInput.value);
-            
-            if (qty < 1) return;
-
+            const qty = parseInt(document.getElementById(`qty-${id}`).value);
             const existing = cart.find(i => i.id === id);
-            if(existing) {
-                existing.qty += qty;
-            } else {
-                cart.push({...product, qty});
-            }
-            
-            qtyInput.value = 1; // Reset input after adding
+            if(existing) existing.qty += qty; else cart.push({...product, qty});
+            saveCart();
+            updateUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
             updateUI();
         }
 
@@ -168,54 +182,44 @@
             const list = document.getElementById('cart-items');
             const sub = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
             const ship = sub > 0 ? storeData.config.shipping_fee : 0;
-            
             document.getElementById('cart-count').innerText = cart.length;
             document.getElementById('sub-price').innerText = `${storeData.config.currency}${sub}`;
             document.getElementById('ship-price').innerText = `${storeData.config.currency}${ship}`;
             document.getElementById('grand-price').innerText = `${storeData.config.currency}${sub + ship}`;
-            
-            list.innerHTML = cart.map(i => `
-                <div class="flex justify-between text-sm group">
-                    <span class="text-stone-600">${i.name} <span class="text-xs font-bold text-stone-400">x${i.qty}</span></span>
-                    <span class="font-medium">${storeData.config.currency}${i.price * i.qty}</span>
-                </div>
-            `).join('');
+            if (cart.length === 0) {
+                list.innerHTML = `<p class="text-stone-400 text-sm italic text-center py-4">Cart is empty</p>`;
+            } else {
+                list.innerHTML = cart.map(i => `
+                    <div class="flex justify-between items-center text-sm border-b pb-2">
+                        <div><p class="font-medium">${i.name}</p><p class="text-xs text-stone-400">Qty: ${i.qty}</p></div>
+                        <div class="flex items-center gap-4"><span class="font-bold">${storeData.config.currency}${i.price * i.qty}</span><button onclick="removeFromCart(${i.id})" class="text-red-400 text-lg">×</button></div>
+                    </div>`).join('');
+            }
         }
+
+        document.getElementById('order-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(!cart.length) return alert("Cart is empty!");
+
+            const subTotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const shipping = storeData.config.shipping_fee;
+            const grandTotal = document.getElementById('grand-price').innerText;
+            const itemsList = cart.map(i => `- ${i.name} (x${i.qty})`).join('%0A');
+            
+            const msg = `*NEW ORDER - ${storeData.config.store_name}*%0A%0A` + 
+                        `*Customer:* ${document.getElementById('name').value}%0A` +
+                        `*WhatsApp:* ${document.getElementById('phone').value}%0A%0A` +
+                        `*Items:*%0A${itemsList}%0A%0A` +
+                        `*Subtotal:* ${storeData.config.currency}${subTotal}%0A` +
+                        `*Shipping:* ${storeData.config.currency}${shipping}%0A` +
+                        `*Grand Total:* ${grandTotal}%0A%0A` +
+                        `*Address:*%0A${document.getElementById('address').value}`;
+
+            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${msg}`, '_blank');
+        });
 
         document.getElementById('category-filter').addEventListener('change', render);
         document.getElementById('search-input').addEventListener('input', render);
-        
-        // --- WHATSAPP ORDER LOGIC WITH ADDRESS ---
-        document.getElementById('order-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            if(cart.length === 0) {
-                alert("Your cart is empty. Add some artisanal weaves before checking out!");
-                return;
-            }
-
-            // Capture form values
-            const customerName = document.getElementById('name').value.trim();
-            const customerPhone = document.getElementById('phone').value.trim();
-            const customerAddress = document.getElementById('address').value.trim();
-            const totalAmount = document.getElementById('grand-price').innerText;
-
-            // Format item list for WhatsApp
-            const itemString = cart.map(item => `• ${item.name} (x${item.qty}) - ${storeData.config.currency}${item.price * item.qty}`).join('%0A');
-
-            // Build the final message template
-            const message = `*NEW ORDER - NOOLPINNAL*%0A%0A` +
-                            `*Customer:* ${customerName}%0A` +
-                            `*WhatsApp:* ${customerPhone}%0A%0A` +
-                            `*Items Ordered:*%0A${itemString}%0A%0A` +
-                            `*Total Amount:* ${totalAmount}%0A%0A` +
-                            `*Delivery Address:*%0A${customerAddress}`;
-
-            // Open WhatsApp
-            const waUrl = `https://wa.me/${storeData.config.whatsapp_number}?text=${message}`;
-            window.open(waUrl, '_blank');
-        });
-
         init();
     </script>
 </body>
