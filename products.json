@@ -48,7 +48,7 @@
       "name": "Mobile Pouch", 
       "category": "Mobile Pouch", 
       "price": 350, 
-      "images": ["./images/Mobile pouch.png"] 
+      "images": ["./images/MobilePouch.png"] 
     },
     { 
       "id": 7, 
