@@ -6,24 +6,23 @@
     "currency": "₹",
     "logo_url": "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/cb47fb2e7f6b0fe7d2fed5596cc82d25fdb6ca91/products.json"
   },
-  "categories": ["Signature Sarees", "Handwoven Stoles"],
+  "categories": ["Airpods/Mini pouch", "sweater", "Mobile pouch","Headphone pouch", ],
   "products": [
     { 
       "id": 1, 
-      "name": "Amber Weaver Silk", 
-      "category": "Signature Sarees", 
+      "name": "Box shaped cute mini pouch", 
+      "category": "Airpods/Mini pouch", 
       "price": 4500, 
       "images": [
-        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800",
-        "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800"
+        "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/9903100e18e3163466e3929b0e3d133c27b0ff5a/images/box%20shaped%20cute%20mini%20pouch%20.png"
       ] 
     },
     { 
       "id": 2, 
-      "name": "Midnight Indigo Wrap", 
-      "category": "Handwoven Stoles", 
+      "name": "Flower pouch", 
+      "category": "Airpods/Mini pouch", 
       "price": 1250, 
-      "images": ["https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=800"] 
+      "images": ["https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/9903100e18e3163466e3929b0e3d133c27b0ff5a/images/flower%20pouch.png"] 
     }
   ]
 }
