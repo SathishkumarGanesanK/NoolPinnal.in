@@ -22,7 +22,7 @@
       "name": "Flower pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": [./images/flower pouch.png] 
+      "images": ["./images/flower pouch.png"] 
     }
   ]
 }
