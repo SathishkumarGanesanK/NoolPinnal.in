@@ -6,7 +6,7 @@
     "currency": "₹",
     "logo_url": "./images/NoolPinnal Logo.png"
   },
-  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile Pouch","Headphone pouch","Hat"],
+  "categories": ["Airpods/Mini pouch", "Sweater and Others", "Mobile Pouch","Headphone pouch","Hat"],
   "products": [
     { 
       "id": 1, 
@@ -39,28 +39,28 @@
     { 
       "id": 5, 
       "name": "Headphone Pouch", 
-      "category": "Headphone pouch", 
+      "category": "Sweater and Others", 
       "price": 100, 
       "images": ["./images/headphone pouch.png", "./images/HeadPhonePouch1.png"] 
     },
     { 
       "id": 6, 
       "name": "Mobile Pouch", 
-      "category": "Mobile Pouch", 
+      "category": "Sweater and Others", 
       "price": 350, 
       "images": ["./images/MobilePouch.png"] 
     },
     { 
       "id": 7, 
       "name": "Baby Sweater (6-12) Months", 
-      "category": "Sweater", 
+      "category": "Sweater and Others", 
       "price": 1000, 
       "images": ["./images/Sweater.png"] 
     },
     {
       "id": 8, 
       "name": "Baby Hat (1-4) Years", 
-      "category": "Hat", 
+      "category": "Sweater and Others", 
       "price": 1000, 
       "images": ["./images/BabyHat.png"] 
     }
