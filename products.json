@@ -6,7 +6,7 @@
     "currency": "₹",
     "logo_url": "./images/NoolPinnal Logo.png"
   },
-  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile Pouch","Headphone pouch"],
+  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile Pouch","Headphone pouch","Hat"],
   "products": [
     { 
       "id": 1, 
@@ -56,6 +56,13 @@
       "category": "Sweater", 
       "price": 1000, 
       "images": ["./images/Sweater.png"] 
+    },
+    {
+      "id": 8, 
+      "name": "Baby Hat (1-4) Years", 
+      "category": "Hat", 
+      "price": 1000, 
+      "images": ["./images/BabyHat.png"] 
     }
   ]
 }
