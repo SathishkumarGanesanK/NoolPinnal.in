@@ -3,142 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoolPinnal.in | Handcrafted Elegance</title>
+    <title>NoolPinnal | Handcrafted Weaves</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .aspect-9-16 { aspect-ratio: 9 / 16; }
+        .glass-morphism { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800 font-sans">
+<body class="bg-[#faf9f6] text-[#2d2a26]">
 
-    <header class="sticky top-0 bg-white shadow-sm z-50 p-4 text-center">
-        <h1 class="text-2xl font-bold tracking-widest text-teal-800">NOOLPINNAL.IN</h1>
+    <nav class="sticky top-0 z-50 glass-morphism border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="NoolPinnal Logo.jpg" alt="NoolPinnal Logo" class="h-12 w-12 rounded-full object-contain">
+                <span class="text-xl font-bold tracking-tighter text-[#1a3a3a]">NoolPinnal.in</span>
+            </div>
+            <div id="cart-counter" class="bg-[#1a3a3a] text-white text-xs px-2 py-1 rounded-full">0 Items</div>
+        </div>
+    </nav>
+
+    <header class="py-16 px-6 text-center">
+        <h2 class="text-4xl font-light italic mb-2">The Art of the Thread</h2>
+        <p class="text-stone-500 uppercase tracking-widest text-sm">Established 2026</p>
     </header>
 
-    <main class="max-w-6xl mx-auto p-6">
-        <div id="store-front"></div>
+    <main class="max-w-7xl mx-auto px-6">
+        <div id="store-container" class="space-y-20">
+            <div class="flex justify-center py-20"><p class="animate-pulse">Loading collection...</p></div>
+        </div>
 
-        <hr class="my-12 border-stone-200">
-
-        <section class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-xl font-bold mb-6 border-b pb-2">Checkout Details</h2>
-            <form id="checkout-form" class="space-y-4">
-                <input type="text" id="name" placeholder="Full Name" class="w-full p-3 border rounded" required>
-                <input type="tel" id="mobile" placeholder="Mobile Number" class="w-full p-3 border rounded" required>
-                <input type="email" id="email" placeholder="Email Address" class="w-full p-3 border rounded" required>
-                <textarea id="address" placeholder="Shipping Address" class="w-full p-3 border rounded" rows="3" required></textarea>
-                
-                <div class="bg-stone-100 p-4 rounded-lg mt-6">
-                    <h3 class="font-bold mb-3">Order Summary</h3>
-                    <div id="cart-items" class="space-y-2 text-sm"></div>
-                    <div class="border-t mt-4 pt-4 space-y-1">
-                        <div class="flex justify-between"><span>Subtotal</span><span id="subtotal">₹0</span></div>
-                        <div class="flex justify-between"><span>Shipping</span><span id="shipping">₹0</span></div>
-                        <div class="flex justify-between font-bold text-lg text-teal-900"><span>Grand Total</span><span id="total">₹0</span></div>
+        <section id="checkout" class="my-32 grid grid-cols-1 lg:grid-cols-2 gap-16 border-t pt-20">
+            <div>
+                <h2 class="text-3xl font-semibold mb-8">Shipping Information</h2>
+                <form id="order-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" id="cust-name" placeholder="Full Name" class="bg-transparent border-b border-stone-300 py-3 focus:border-[#1a3a3a] outline-none transition" required>
+                        <input type="tel" id="cust-phone" placeholder="WhatsApp Number" class="bg-transparent border-b border-stone-300 py-3 focus:border-[#1a3a3a] outline-none transition" required>
                     </div>
-                </div>
+                    <input type="email" id="cust-email" placeholder="Email Address" class="w-full bg-transparent border-b border-stone-300 py-3 focus:border-[#1a3a3a] outline-none transition" required>
+                    <textarea id="cust-address" placeholder="Complete Shipping Address" rows="3" class="w-full bg-transparent border-b border-stone-300 py-3 focus:border-[#1a3a3a] outline-none transition" required></textarea>
+                </form>
+            </div>
 
-                <button type="submit" class="w-full bg-teal-800 text-white font-bold py-4 rounded hover:bg-teal-900 transition">
-                    PLACE ORDER VIA WHATSAPP
+            <div class="bg-stone-100 p-8 rounded-2xl">
+                <h3 class="text-xl font-bold mb-6">Your Selection</h3>
+                <div id="cart-list" class="space-y-4 mb-8 max-h-64 overflow-y-auto">
+                    <p class="text-stone-400 italic">Your cart is currently empty.</p>
+                </div>
+                <div class="border-t border-stone-200 pt-6 space-y-3">
+                    <div class="flex justify-between text-stone-600"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+                    <div class="flex justify-between text-stone-600"><span>Shipping Fee</span><span id="shipping">₹0</span></div>
+                    <div class="flex justify-between text-xl font-bold mt-4 pt-4 border-t"><span>Total Amount</span><span id="grand-total">₹0</span></div>
+                </div>
+                <button type="submit" form="order-form" class="w-full mt-8 bg-[#1a3a3a] text-white py-5 rounded-xl font-bold tracking-widest hover:bg-[#264d4d] transition-all transform active:scale-95">
+                    COMPLETE ORDER ON WHATSAPP
                 </button>
-            </form>
+            </div>
         </section>
     </main>
 
-    <script>
-        // Store Configuration & Data
-        const storeData = {
-            config: { whatsapp_number: "919876543210", shipping_fee: 100, currency: "₹" },
-            categories: ["Handloom Sarees", "Stoles & Scarves"],
-            products: [
-                { id: 1, name: "Kanchipuram Silk", category: "Handloom Sarees", price: 4500, img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1080&h=1920&auto=format&fit=crop" },
-                { id: 2, name: "Cotton Weave", category: "Handloom Sarees", price: 2200, img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1080&h=1920&auto=format&fit=crop" },
-                { id: 3, name: "Indigo Stole", category: "Stoles & Scarves", price: 850, img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?q=80&w=1080&h=1920&auto=format&fit=crop" }
-            ]
-        };
+    <footer class="py-12 border-t text-center text-stone-400 text-sm">
+        &copy; 2026 NoolPinnal.in — All Rights Reserved.
+    </footer>
 
+    <script>
+        let storeData = {};
         let cart = [];
 
-        // Render Products by Category
-        const storeContainer = document.getElementById('store-front');
-        storeData.categories.forEach(cat => {
-            const section = document.createElement('section');
-            section.className = "mb-12";
-            section.innerHTML = `<h2 class="text-2xl font-serif italic mb-6 text-stone-600">${cat}</h2>
-                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>`;
-            
-            storeData.products.filter(p => p.category === cat).forEach(prod => {
-                const card = document.createElement('div');
-                card.className = "group";
-                card.innerHTML = `
-                    <div class="aspect-9-16 overflow-hidden bg-gray-200 rounded-lg">
-                        <img src="${prod.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="mt-4 flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-medium">${prod.name}</h3>
-                            <p class="text-teal-800 font-bold">${storeData.config.currency}${prod.price}</p>
-                        </div>
-                        <div class="flex flex-col items-end gap-2">
-                            <input type="number" id="qty-${prod.id}" value="1" min="1" class="w-12 border p-1 text-center text-sm">
-                            <button onclick="addToCart(${prod.id})" class="bg-stone-800 text-white text-xs px-3 py-2 rounded uppercase tracking-tighter">Add to Cart</button>
-                        </div>
-                    </div>`;
-                section.querySelector('div').appendChild(card);
-            });
-            storeContainer.appendChild(section);
-        });
+        // 1. FETCH JSON DATA
+        async function loadStore() {
+            try {
+                const response = await fetch('products.json');
+                storeData = await response.json();
+                renderProducts();
+            } catch (err) {
+                document.getElementById('store-container').innerHTML = `<p class="text-red-500 text-center">Unable to load catalog. Please check products.json file.</p>`;
+            }
+        }
 
-        // Cart Logic
+        // 2. RENDER PRODUCTS
+        function renderProducts() {
+            const container = document.getElementById('store-container');
+            container.innerHTML = '';
+
+            storeData.categories.forEach(cat => {
+                const section = document.createElement('section');
+                const catProducts = storeData.products.filter(p => p.category === cat);
+                
+                if(catProducts.length === 0) return;
+
+                section.innerHTML = `
+                    <div class="flex items-baseline gap-4 mb-10">
+                        <h3 class="text-2xl font-semibold">${cat}</h3>
+                        <div class="h-[1px] flex-grow bg-stone-200"></div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                        ${catProducts.map(p => `
+                            <div class="group">
+                                <div class="aspect-9-16 overflow-hidden bg-stone-200 rounded-sm relative shadow-sm">
+                                    <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                                    <div class="absolute bottom-4 right-4 flex items-center bg-white shadow-xl rounded-lg overflow-hidden">
+                                        <input type="number" id="qty-${p.id}" value="1" min="1" class="w-10 text-center text-sm font-bold border-none outline-none">
+                                        <button onclick="addToCart(${p.id})" class="bg-[#1a3a3a] text-white px-4 py-2 text-xs font-bold uppercase">Add</button>
+                                    </div>
+                                </div>
+                                <div class="mt-6 flex justify-between items-start">
+                                    <h4 class="text-lg font-light">${p.name}</h4>
+                                    <span class="font-semibold text-[#1a3a3a]">${storeData.config.currency}${p.price}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        // 3. CART LOGIC
         function addToCart(id) {
             const product = storeData.products.find(p => p.id === id);
             const qty = parseInt(document.getElementById(`qty-${id}`).value);
             const existing = cart.find(item => item.id === id);
-            
+
             if(existing) existing.qty += qty;
             else cart.push({...product, qty});
-            
-            renderCart();
+
+            updateUI();
         }
 
-        function renderCart() {
-            const list = document.getElementById('cart-items');
-            list.innerHTML = cart.map(item => `
-                <div class="flex justify-between">
-                    <span>${item.name} (x${item.qty})</span>
-                    <span>${storeData.config.currency}${item.price * item.qty}</span>
-                </div>
-            `).join('');
-
+        function updateUI() {
+            const list = document.getElementById('cart-list');
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const ship = subtotal > 0 ? storeData.config.shipping_fee : 0;
-            
+            const shipping = subtotal > 0 ? storeData.config.shipping_fee : 0;
+
+            document.getElementById('cart-counter').innerText = `${cart.length} Items`;
             document.getElementById('subtotal').innerText = `${storeData.config.currency}${subtotal}`;
-            document.getElementById('shipping').innerText = `${storeData.config.currency}${ship}`;
-            document.getElementById('total').innerText = `${storeData.config.currency}${subtotal + ship}`;
+            document.getElementById('shipping').innerText = `${storeData.config.currency}${shipping}`;
+            document.getElementById('grand-total').innerText = `${storeData.config.currency}${subtotal + shipping}`;
+
+            list.innerHTML = cart.length ? cart.map(item => `
+                <div class="flex justify-between items-center text-sm border-b border-stone-200 pb-2">
+                    <div>
+                        <p class="font-medium">${item.name}</p>
+                        <p class="text-stone-400 text-xs">${item.qty} x ${storeData.config.currency}${item.price}</p>
+                    </div>
+                    <span class="font-semibold">${storeData.config.currency}${item.price * item.qty}</span>
+                </div>
+            `).join('') : `<p class="text-stone-400 italic">Your cart is currently empty.</p>`;
         }
 
-        // WhatsApp Checkout
-        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+        // 4. WHATSAPP CHECKOUT
+        document.getElementById('order-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            if(cart.length === 0) return alert("Cart is empty!");
+            if(!cart.length) return alert("Please add items to your cart first.");
 
-            const name = document.getElementById('name').value;
-            const address = document.getElementById('address').value;
+            const details = {
+                name: document.getElementById('cust-name').value,
+                phone: document.getElementById('cust-phone').value,
+                address: document.getElementById('cust-address').value
+            };
+
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const total = subtotal + storeData.config.shipping_fee;
 
-            let message = `*New Order from NoolPinnal.in*%0A%0A`;
-            message += `*Customer:* ${name}%0A`;
-            message += `*Address:* ${address}%0A%0A`;
-            message += `*Items:*%0A`;
-            cart.forEach(item => {
-                message += `- ${item.name} x ${item.qty} (${storeData.config.currency}${item.price * item.qty})%0A`;
-            });
-            message += `%0A*Total:* ${storeData.config.currency}${total}`;
+            let msg = `*NEW ORDER - NOOLPINNAL.IN*%0A`;
+            msg += `--------------------------%0A`;
+            msg += `*Name:* ${details.name}%0A`;
+            msg += `*Phone:* ${details.phone}%0A`;
+            msg += `*Address:* ${details.address}%0A%0A`;
+            msg += `*ORDER DETAILS:*%0A`;
+            cart.forEach(i => msg += `• ${i.name} (x${i.qty}) - ${storeData.config.currency}${i.price * i.qty}%0A`);
+            msg += `%0A*Subtotal:* ${storeData.config.currency}${subtotal}`;
+            msg += `%0A*Shipping:* ${storeData.config.currency}${storeData.config.shipping_fee}`;
+            msg += `%0A*Grand Total:* ${storeData.config.currency}${total}%0A`;
+            msg += `--------------------------`;
 
-            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${message}`, '_blank');
+            window.open(`https://wa.me/${storeData.config.whatsapp_number}?text=${msg}`, '_blank');
         });
+
+        // Initialize
+        loadStore();
     </script>
 </body>
 </html>
