@@ -1,11 +1,12 @@
 {
   "config": {
+    "store_name": "NoolPinnal.in",
     "whatsapp_number": "919876543210",
     "shipping_fee": 100,
     "currency": "₹",
     "logo_url": "NoolPinnal Logo.jpg"
   },
-  "categories": ["Signature Sarees", "Handwoven Stoles", "Artisan Decor"],
+  "categories": ["Signature Sarees", "Handwoven Stoles", "Home Accents"],
   "products": [
     {
       "id": 1,
@@ -16,10 +17,17 @@
     },
     {
       "id": 2,
-      "name": "Indigo Thread Wrap",
+      "name": "Midnight Indigo Wrap",
       "category": "Handwoven Stoles",
-      "price": 1200,
+      "price": 1250,
       "image": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&q=80&w=1080&h=1920"
+    },
+    {
+      "id": 3,
+      "name": "Floral Loom Throw",
+      "category": "Home Accents",
+      "price": 2100,
+      "image": "https://images.unsplash.com/photo-1574359411659-15573a27f812?auto=format&fit=crop&q=80&w=1080&h=1920"
     }
   ]
 }
