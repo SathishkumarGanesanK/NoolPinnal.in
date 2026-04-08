@@ -6,7 +6,7 @@
     "currency": "₹",
     "logo_url": "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/cb47fb2e7f6b0fe7d2fed5596cc82d25fdb6ca91/products.json"
   },
-  "categories": ["Airpods/Mini pouch", "sweater", "Mobile pouch","Headphone pouch", ],
+  "categories": ["Airpods/Mini pouch", "sweater", "Mobile pouch","Headphone pouch"],
   "products": [
     { 
       "id": 1, 
