@@ -4,7 +4,7 @@
     "whatsapp_number": "919080456837",
     "shipping_fee": 100,
     "currency": "₹",
-    "logo_url": "https://github.com/SathishkumarGanesanK/NoolPinnal.in/blob/cb47fb2e7f6b0fe7d2fed5596cc82d25fdb6ca91/products.json"
+    "logo_url": "./images/NoolPinnal Logo.png"
   },
   "categories": ["Airpods/Mini pouch", "sweater", "Mobile pouch","Headphone pouch"],
   "products": [
@@ -13,9 +13,7 @@
       "name": "Box shaped cute mini pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": [
-        "./images/box shaped cute mini pouch.png"
-      ] 
+      "images": ["./images/box shaped cute mini pouch.png"] 
     },
     { 
       "id": 2, 
