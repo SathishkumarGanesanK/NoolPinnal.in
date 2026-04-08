@@ -6,14 +6,14 @@
     "currency": "₹",
     "logo_url": "./images/NoolPinnal Logo.png"
   },
-  "categories": ["Airpods/Mini pouch", "sweater", "Mobile pouch","Headphone pouch"],
+  "categories": ["Airpods/Mini pouch", "Sweater", "Mobile pouch","Headphone pouch"],
   "products": [
     { 
       "id": 1, 
-      "name": "Box shaped cute mini pouch", 
+      "name": "Square shaped mini pouch", 
       "category": "Airpods/Mini pouch", 
       "price": 200, 
-      "images": ["./images/HeadPhonePouch1.png"] 
+      "images": ["./images/square shaped mini pouch.png.png"] 
     },
     { 
       "id": 2, 
@@ -21,6 +21,41 @@
       "category": "Airpods/Mini pouch", 
       "price": 200, 
       "images": ["./images/flower pouch.png"] 
+    },
+    { 
+      "id": 3, 
+      "name": "Sea Shell Shaped Mini Pouch", 
+      "category": "Airpods/Mini pouch", 
+      "price": 200, 
+      "images": ["./images/sea shell shaped mini pouch.png"] 
+    },
+    { 
+      "id": 4, 
+      "name": "Box Shaped Mini Pouch", 
+      "category": "Airpods/Mini pouch", 
+      "price": 200, 
+      "images": ["./images/box shaped cute mini pouch.png"] 
+    },
+    { 
+      "id": 5, 
+      "name": "Headphone Pouch", 
+      "category": "Headphone pouch", 
+      "price": 200, 
+      "images": ["./images/headphone pouch.png", "./images/HeadPhonePouch1.png"] 
+    },
+    { 
+      "id": 6, 
+      "name": "Mobile Pouch", 
+      "category": "Mobile Pouch", 
+      "price": 200, 
+      "images": ["./images/Mobile pouch.png"] 
+    },
+    { 
+      "id": 7, 
+      "name": "Baby Sweater (6-12) Months", 
+      "category": "Sweater", 
+      "price": 200, 
+      "images": ["./images/Sweater.png"] 
     }
   ]
 }
