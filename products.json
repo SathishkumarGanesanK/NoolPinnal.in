@@ -59,10 +59,24 @@
     },
     {
       "id": 8, 
-      "name": "Baby Hat (1-4) Years", 
+      "name": "Baby Hat (0-6) Months", 
       "category": "Sweater and Others", 
-      "price": 1000, 
+      "price": 350, 
       "images": ["./images/BabyHat.png"] 
+    },
+    {
+      "id": 9, 
+      "name": "Flower Pouch", 
+      "category": "Sweater and Others", 
+      "price": 400, 
+      "images": ["./images/Flower Pouch.png"] 
+    },
+    {
+      "id": 10, 
+      "name": "Key Hiding Key Chain", 
+      "category": "Sweater and Others", 
+      "price": 150, 
+      "images": ["./images/Key Hiding Key Chain.png"] 
     }
   ]
 }
